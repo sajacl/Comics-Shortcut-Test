@@ -1,0 +1,6 @@
+framework module Pods_Comics_Shortcut_Test_Comics_Shortcut_TestUITests {
+  umbrella header "Pods-Comics Shortcut Test-Comics Shortcut TestUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

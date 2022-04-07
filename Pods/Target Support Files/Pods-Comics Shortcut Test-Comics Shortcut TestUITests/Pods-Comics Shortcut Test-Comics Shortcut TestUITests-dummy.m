@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_Comics_Shortcut_Test_Comics_Shortcut_TestUITests : NSObject
+@end
+@implementation PodsDummy_Pods_Comics_Shortcut_Test_Comics_Shortcut_TestUITests
+@end

@@ -1,0 +1,21 @@
+/* 
+  Languages.strings
+  Comics Shortcut Test
+
+  Created by Sajad Vishkai on 4/7/22.
+  
+*/
+
+"appTitle" = "XCKD Comics";
+"searchComics" = "Search comics";
+"seeDetail" = "See detail";
+"loading" = "Loading";
+"share" = "Share";
+"favorite" = "Favorite";
+"comicDetail" = "Comic detail";
+"searchWithIdAndName" = "You can search for comics with id and name";
+"somethingWentWrong" = "Something went wrong...";
+"reload" = "Reload";
+"favoritedComics" = "Favorited Comics";
+"noFavoriteComics" = "You have no favorite comic!";
+"seeFavoriteList" = "See your favorite list";

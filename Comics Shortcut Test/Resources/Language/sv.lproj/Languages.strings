@@ -1,0 +1,21 @@
+/* 
+  Languages.strings
+  Comics Shortcut Test
+
+  Created by Sajad Vishkai on 4/7/22.
+  
+*/
+
+"appTitle" = "XCKD Comics";
+"searchComics" = "Sök serier";
+"seeDetail" = "Se detalj";
+"loading" = "Läser in";
+"share" = "Dela med sig";
+"favorite" = "Favorit";
+"comicDetail" = "Komisk detalj";
+"searchWithIdAndName" = "Du kan söka efter serier med id och namn";
+"somethingWentWrong" = "Något gick fel...";
+"reload" = "Ladda om";
+"favoritedComics" = "Favoritserier";
+"noFavoriteComics" = "Du har ingen favoritserie!";
+"seeFavoriteList" = "Se din favoritlista";
