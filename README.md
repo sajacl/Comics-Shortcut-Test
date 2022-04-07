@@ -63,6 +63,10 @@ Cmd + U
 ## 4. UI Tests
 
 As I mentioned earlier, For sake of a MPV project I have decided to focus on functionality of the app, so UI tests are none at this moment, Realm lib needs to be configed if we want to proceed more.
+It fails the running UI Tests  proccess :(
+
+# Git History
+I have moved this repo from my own local git, so could not get the history right, But i am attaching a screen shot for you to see my history, i can give access to you if it is necessary.
 
 # License
 
