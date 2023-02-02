@@ -9,39 +9,63 @@ import MetricKit
 import RealmSwift
 import UIKit
 
-class ThirdPartiesConfiguratorAppDelegate: AppDelegateType {
+final class ThirdPartiesConfiguratorAppDelegate: AppDelegateType, MXMetricManagerSubscriber {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        MXMetricManager.shared.add(self)
+
         setupRealm()
-    
-        OnlineLog.setupOnlineLogs(formLink: "https://docs.google.com/forms/d/1p0MCcnNcQWV5jI9LoEBiQQ7R2ZiL60_mvhjc_9XNW6A/formResponse", versionField: "entry.2005620554", userInfoField: "entry.1045781291", methodInfoField: "entry.1065046570", textField: "entry.1166974658")
-        
-        Log.enabled = false
-        OnlineLog.enabled = true
+        addApplicationToMetrics()
         
         return true
     }
     
-    fileprivate func setupRealm() {
-        let config = Realm.Configuration(
-            schemaVersion: 1,
-            migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) { }
-            })
+    private func setupRealm() {
+        let config = Realm.Configuration(schemaVersion: 1)
         
         Realm.Configuration.defaultConfiguration = config
     }
+
+    private func addApplicationToMetrics() {
+        MXMetricManager.shared.add(self)
+    }
 }
 
-extension ThirdPartiesConfiguratorAppDelegate: MXMetricManagerSubscriber {
-    func didReceive(_ payloads: [MXMetricPayload]) {
-        guard let firstPayload = payloads.first else { return }
-        print(firstPayload.dictionaryRepresentation())
+import Foundation
+import OSLog
+
+extension Logger {
+    private static var subsystem = Bundle.main.bundleIdentifier!
+
+    init(category: String) {
+        self.init(subsystem: Self.subsystem, category: category)
     }
-    
-    func didReceive(_ payloads: [MXDiagnosticPayload]) {
-        guard let firstPayload = payloads.first else { return }
-        print(firstPayload.dictionaryRepresentation())
+
+    func error<T: Error>(
+        error: T,
+        message: @autoclosure () -> String? = nil,
+        file: String = #file,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        var _error = ""
+
+        if let prefixMessage = message() {
+            _error = prefixMessage.addLineBreak()
+        }
+
+        _error += "{".addLineBreak()
+        _error += "\t" + file.addLineBreak()
+        _error += "\t" + function.addLineBreak()
+        _error += "\t" + String(line).addLineBreak()
+        _error += "}".addLineBreak()
+
+        _error += error.localizedDescription
+
+        self.error("\(_error)")
+    }
+}
+
+private extension String {
+    func addLineBreak() -> Self {
+        self + "\n"
     }
 }

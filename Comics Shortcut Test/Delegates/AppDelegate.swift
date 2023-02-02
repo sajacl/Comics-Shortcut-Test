@@ -10,18 +10,32 @@ import CoreData
 import RealmSwift
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    let appDelegate = AppDelegateFactory.default()
+final class AppDelegate: UIResponder, UIApplicationDelegate {
+    /// Default app delegates/configurations factory.
+    private let appDelegate = AppDelegateFactory.default()
+
+    /// Default configuration name for `UIScene`.
+    private let defaultSceneName = "Default Configuration"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        _ = appDelegate.application?(application, didFinishLaunchingWithOptions: launchOptions)
-        return true
+
+        if let didFinishLaunching = appDelegate.application?(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        ) {
+            return didFinishLaunching
+        }
+
+        return false
     }
 
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        return UISceneConfiguration(
+            name: defaultSceneName,
+            sessionRole: connectingSceneSession.role
+        )
     }
 }
 

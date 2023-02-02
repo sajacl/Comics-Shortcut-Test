@@ -9,7 +9,7 @@ import UIKit
 
 typealias AppDelegateType = UIResponder & UIApplicationDelegate
 
-class CompositeAppDelegate: AppDelegateType {
+final class CompositeAppDelegate: AppDelegateType {
     private let appDelegates: [AppDelegateType]
 
     init(appDelegates: [AppDelegateType]) {
@@ -17,8 +17,9 @@ class CompositeAppDelegate: AppDelegateType {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        appDelegates.forEach { _ = $0.application?(application, didFinishLaunchingWithOptions: launchOptions) }
-        return true
+        return appDelegates.allSatisfy {
+            $0.application?(application, didFinishLaunchingWithOptions: launchOptions) ?? false
+        }
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
@@ -26,8 +27,7 @@ class CompositeAppDelegate: AppDelegateType {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        appDelegates.forEach { _ = $0.application?(app, open: url, options: options) }
-        return true
+        appDelegates.allSatisfy { $0.application?(app, open: url, options: options) ?? false }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -35,9 +35,13 @@ class CompositeAppDelegate: AppDelegateType {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        appDelegates.forEach { _ = $0.application?(application, continue: userActivity, restorationHandler: restorationHandler) }
-        
-        return true
+        appDelegates.allSatisfy {
+            $0.application?(
+                application,
+                continue: userActivity,
+                restorationHandler: restorationHandler
+            ) ?? false
+        }
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

@@ -8,8 +8,7 @@
 import Foundation
 import RealmSwift
 
-class RealmComicModel: Object {
-    
+final class RealmComicModel: Object {
     @objc dynamic var id: Int = 0
     @objc dynamic var month: String = ""
     @objc dynamic var num: Int = -1
@@ -24,14 +23,16 @@ class RealmComicModel: Object {
     @objc dynamic var day: String = ""
     @objc dynamic var isFavorite: Bool = false
     
-    func imageURL() -> URL {
+    func imageURL() throws -> URL {
         guard let url = URL(string: img) else {
-            preconditionFailure()
+            throw URLError(.badURL)
         }
+
         return url
     }
+
     override static func primaryKey() -> String? {
-        return "id"
+        return #keyPath(RealmComicModel.id)
     }
 }
 

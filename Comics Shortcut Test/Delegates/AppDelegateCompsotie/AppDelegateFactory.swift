@@ -9,6 +9,12 @@ import Foundation
 
 enum AppDelegateFactory {
     static func `default`() -> AppDelegateType {
-        return CompositeAppDelegate(appDelegates: [PushNotificationsAppDelegate(), ThirdPartiesConfiguratorAppDelegate(), ShortcutHandlerAppDelegate()])
+        return CompositeAppDelegate(
+            appDelegates: [
+                ThirdPartiesConfiguratorAppDelegate(),
+                PushNotificationsAppDelegate(),
+                ShortcutHandlerAppDelegate()
+            ]
+        )
     }
 }
