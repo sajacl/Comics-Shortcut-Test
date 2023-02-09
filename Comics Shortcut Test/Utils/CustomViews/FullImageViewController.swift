@@ -8,26 +8,40 @@
 import Kingfisher
 import SwiftUI
 
-struct FullImageComicViewControllerWrapper: UIViewControllerRepresentable {
-    typealias UIViewControllerType = FullImageComicViewController
-    
-    let imageURL: URL
-    let comicName: String
-    
-    init(imageURL: URL, comicName: String) {
-        self.imageURL = imageURL
-        self.comicName = comicName
-    }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<FullImageComicViewControllerWrapper>) -> FullImageComicViewControllerWrapper.UIViewControllerType {
-
-        return FullImageComicViewController(imageURL: imageURL, comicName: comicName)
-    }
-
-    func updateUIViewController(_ uiViewController: FullImageComicViewControllerWrapper.UIViewControllerType, context: UIViewControllerRepresentableContext<FullImageComicViewControllerWrapper>) {}
+enum ImageOrURL {
+    case image(UIImage)
+    case url(URL)
 }
 
-class FullImageComicViewController: ParentViewControllerClass {
+struct FullImageComicViewControllerWrapper: UIViewControllerRepresentable {
+    typealias UIViewControllerType = UIViewController
+    
+    /// Comic name to be used as view's title in navigation bar.
+    let name: String
+    
+    /// Comic image/url.
+    let pair: ImageOrURL
+    
+    init(name: String, pair: ImageOrURL) {
+        self.pair = pair
+        self.name = name
+    }
+
+    func makeUIViewController(
+        context: UIViewControllerRepresentableContext<Self>
+    ) -> Self.UIViewControllerType {
+        return FullImageComicViewController(title: name, pair: pair)
+    }
+
+    func updateUIViewController(
+        _ uiViewController: Self.UIViewControllerType,
+        context: UIViewControllerRepresentableContext<Self>
+    ) {
+        // no op
+    }
+}
+
+private final class FullImageComicViewController: ParentViewControllerClass {
     private lazy var imageScrollView: ImageScrollView = {
         let parent = ImageScrollView()
         parent.setup()
@@ -38,6 +52,7 @@ class FullImageComicViewController: ParentViewControllerClass {
     }()
     
     private lazy var comicImageView: UIImageView = UIImageView()
+    
     private lazy var titleLabel: UILabel = {
         let parent = UILabel()
         parent.textColor = .black
@@ -47,35 +62,72 @@ class FullImageComicViewController: ParentViewControllerClass {
         return parent
     }()
     
+    private let pair: ImageOrURL
+    
     // MARK: - LifeCycles
-    convenience init(imageURL: URL, comicName: String) {
-        self.init()
+    init(title: String, pair: ImageOrURL) {
+        self.pair = pair
         
-        KF.url(imageURL, cacheKey: "\(imageURL.absoluteString)")
-            .placeholder(UIImage())
-            .loadDiskFileSynchronously()
-            .cacheOriginalImage()
-            .fade(duration: 0.1)
-            .set(to: comicImageView)
+        super.init(nibName: nil, bundle: nil)
         
-        titleLabel.text = comicName
+        titleLabel.text = title
     }
     
-    convenience init(image: UIImage, comicName: String) {
-        self.init()
-        
-        comicImageView.image = image
-        titleLabel.text = comicName
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if self.imageScrollView.zoomView == nil, let image = comicImageView.image {
-            UIView.transition(with: imageScrollView, duration: 0.4, options: .transitionCrossDissolve, animations: {
-                self.imageScrollView.display(image: image)
-            })
+        switch pair {
+        case let .image(image):
+            imageScrollView.display(image: image)
+            
+        case let .url(url):
+            let token = KF.url(url, cacheKey: "\(url.absoluteString)")
+                .placeholder(Self.placeHolderImage)
+                .loadDiskFileSynchronously()
+                .cacheOriginalImage()
+                .fade(duration: 0.1)
+
+                .onSuccess { [weak self] result in
+                    self?.displayImage(result.image)
+                }
         }
+    }
+    
+    deinit {
+        print("HI")
+    }
+    
+    private static let placeHolderImage = UIImage(named: "shortcut-icon")
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//        if self.imageScrollView.zoomView == nil,
+//           let image = comicImageView.image {
+//            UIView.transition(
+//                with: imageScrollView,
+//                duration: 0.4,
+//                options: .transitionCrossDissolve,
+//                animations: {
+//                    self.imageScrollView.display(image: image)
+//                }
+//            )
+//        }
+//    }
+    
+    private func displayImage(_ image: UIImage) {
+        UIView.transition(
+            with: imageScrollView,
+            duration: 0.4,
+            options: .transitionCrossDissolve,
+            animations: {
+                self.imageScrollView.display(image: image)
+            }
+        )
     }
     
     override func configViewController() {
@@ -103,7 +155,7 @@ class FullImageComicViewController: ParentViewControllerClass {
             .bottomAnchor(equalTo: view.bottomAnchor, constant: -10)
     }
     
-    func addLightBlurEffect() {
+    private func addLightBlurEffect() {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds

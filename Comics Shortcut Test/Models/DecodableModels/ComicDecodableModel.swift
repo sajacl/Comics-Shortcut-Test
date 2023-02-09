@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - ComicDecodableModel
+/// Decodable representation `Comic`.
 struct ComicDecodableModel: Decodable {
     let month: String?
     let num: Int?

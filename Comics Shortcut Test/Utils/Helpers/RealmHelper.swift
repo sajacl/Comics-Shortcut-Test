@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-class RealmHelper {
+final class RealmHelper {
     // MARK: - Publics
     static let shared = RealmHelper()
     
@@ -35,10 +35,11 @@ class RealmHelper {
     ///
     /// - Parameter comic: ComicModel to save in DB.
     ///
-    open func saveComic(comic: ComicModel) {
+    func saveComic(comic: ComicModel) {
         self.realm.beginWrite()
-        let ComicData = RealmComicModel(from: comic)
+        let ComicData = ComicRealmObject(from: comic)
         self.realm.add(ComicData, update: .modified)
+        
         do {
             try self.realm.commitWrite()
         } catch {
@@ -57,9 +58,11 @@ class RealmHelper {
     /// - Parameter id: Comic id for applying to predicate on search.
     ///
     /// - Returns: A specific optional comic with given Id.
-    open func fetchComic(id: Int) -> ComicModel? {
-        let allComics = realm.objects(RealmComicModel.self)
-            .filter("\(#keyPath(RealmComicModel.id)) == %@", id)
+    func fetchComic(id: Int) -> ComicModel? {
+        let allComics = realm.objects(ComicRealmObject.self)
+            .filter { comic in
+                return comic.id == id
+            }
         
         if let comic = allComics.first {
             return ComicModel(from: comic)
@@ -77,8 +80,8 @@ class RealmHelper {
     ///     1: let comics = fetchAllComics()
     ///
     /// - Returns: List of ComicModel.
-    open func fetchAllComics() -> [ComicModel] {
-        realm.objects(RealmComicModel.self).map { ComicModel(from: $0) }
+    func fetchAllComics() -> [ComicModel] {
+        realm.objects(ComicRealmObject.self).map(ComicModel.init(from:))
     }
     
     /// To fetch all comics that user has made it favorite.
@@ -90,10 +93,10 @@ class RealmHelper {
     ///     1: let favorites = fetchFavoritedComics()
     ///
     /// - Returns: List of favorited ComicModel.
-    open func fetchFavoritedComics() -> [ComicModel] {
-        realm.objects(RealmComicModel.self)
-            .filter("\(#keyPath(RealmComicModel.isFavorite)) == %@", true)
-            .map { ComicModel(from: $0) }
+    func fetchFavoritedComics() -> [ComicModel] {
+        realm.objects(ComicRealmObject.self)
+            .filter(\.isFavorite)
+            .map(ComicModel.init(from:))
     }
     
     /// To check if a comic is favorited in Database.
@@ -107,8 +110,11 @@ class RealmHelper {
     /// - Parameter comic: ComicModel for applying to predicate on search.
     ///
     /// - Returns: Boolean for value of isFavorited.
-    open func comicIsFavorited(comic: ComicModel) -> Bool {
-        let allComics = realm.objects(RealmComicModel.self).filter("\(#keyPath(RealmComicModel.id)) == %@", Int(comic.id))
+    func comicIsFavorited(comic: ComicModel) -> Bool {
+        let allComics = realm.objects(ComicRealmObject.self)
+            .filter {
+                return $0.id == comic.id
+            }
         
         if let comic = allComics.first {
             return comic.isFavorite
@@ -129,9 +135,9 @@ class RealmHelper {
     ///
     /// - Returns: Boolean for if save succeeded.
     @discardableResult
-    open func toggleFavorite(comic: ComicModel) -> Bool {
+    func toggleFavorite(comic: ComicModel) -> Bool {
         self.realm.beginWrite()
-        let newComic = RealmComicModel(from: ComicModel(model: comic, isFavorite: !comic.isFavorite))
+        let newComic = ComicRealmObject(from: ComicModel(model: comic, isFavorite: !comic.isFavorite))
         self.realm.add(newComic, update: .modified)
         
         do {

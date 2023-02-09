@@ -60,7 +60,7 @@ extension ComicCardView {
                     return data
                 }
                 .decode(type: ComicDecodableModel.self, decoder: JSONDecoder())
-                .map({ ComicModel(decodableModel: $0) })
+                .map({ ComicModel(from: $0) })
             
                 .mapError { error -> APIResult.Error in
                     if let httpError = error as? APIResult.Error {

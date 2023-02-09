@@ -49,7 +49,7 @@ struct ComicCardView: CardView {
                     }
                 }
                 
-                KFImage(viewModel.comic?.imageURL())
+                KFImage(try! viewModel.comic?.createImageURL())
                     .cacheOriginalImage()
                     .placeholder({
                         Text(String(.loading))

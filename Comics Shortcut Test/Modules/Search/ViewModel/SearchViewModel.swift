@@ -65,7 +65,7 @@ extension SearchView {
                 }
                 .decode(type: [SearchedComicsDecodableModel].self, decoder: JSONDecoder())
                 .map({ decodableModels in
-                    decodableModels.map { SearchComicModel(decodableModel: $0) }
+                    decodableModels.map { SearchComicModel(from: $0) }
                 })
                 .mapError { error -> APIResult.Error in
                     if let httpError = error as? APIResult.Error {
@@ -95,7 +95,7 @@ extension SearchView {
                     return data
                 }
                 .decode(type: ComicDecodableModel.self, decoder: JSONDecoder())
-                .map({ ComicModel(decodableModel: $0) })
+                .map({ ComicModel(from: $0) })
             
                 .mapError { error -> APIResult.Error in
                     if let httpError = error as? APIResult.Error {

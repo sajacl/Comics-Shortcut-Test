@@ -2,8 +2,8 @@
 //  ImageScrollView.swift
 //  Comics Shortcut Test
 //
-//  Created by Sajad Vishkai on 4/6/22.
-//
+//  Created by Unknown on 4/6/22.
+//  I can't remember where I found this xD.
 
 import UIKit
 

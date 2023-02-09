@@ -20,7 +20,7 @@
 		FC2CE39727FDB775006BCEE7 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE39627FDB775006BCEE7 /* SearchView.swift */; };
 		FC2CE39A27FDBE2A006BCEE7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FC2CE39927FDBE2A006BCEE7 /* Realm */; };
 		FC2CE39C27FDBE2A006BCEE7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FC2CE39B27FDBE2A006BCEE7 /* RealmSwift */; };
-		FC2CE39F27FDBF56006BCEE7 /* RealmComicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE39E27FDBF56006BCEE7 /* RealmComicModel.swift */; };
+		FC2CE39F27FDBF56006BCEE7 /* ComicRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE39E27FDBF56006BCEE7 /* ComicRealmObject.swift */; };
 		FC2CE3A127FDCF6E006BCEE7 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE3A027FDCF6E006BCEE7 /* SearchField.swift */; };
 		FC2CE3B227FDE092006BCEE7 /* StarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE3B027FDE091006BCEE7 /* StarShape.swift */; };
 		FC2CE3B427FDE0CF006BCEE7 /* ComicDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE3B327FDE0CF006BCEE7 /* ComicDetail.swift */; };
@@ -46,7 +46,6 @@
 		FC2CE41D27FE4616006BCEE7 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE41C27FE4616006BCEE7 /* AppStrings.swift */; };
 		FC2CE42027FE4CB5006BCEE7 /* RealmHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CE41F27FE4CB5006BCEE7 /* RealmHelperTests.swift */; };
 		FC37897F27FCE7D900481C43 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC37897E27FCE7D900481C43 /* ShareSheet.swift */; };
-		FC37898427FCEF5000481C43 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC37898327FCEF5000481C43 /* PersistenceController.swift */; };
 		FCB30FD627FEEC6600FC7C27 /* RealmHelperMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB30FD527FEEC6600FC7C27 /* RealmHelperMockTests.swift */; };
 		FCE4F3EA27FCA854003CEFBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F3E927FCA854003CEFBC /* AppDelegate.swift */; };
 		FCE4F3EC27FCA854003CEFBC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F3EB27FCA854003CEFBC /* SceneDelegate.swift */; };
@@ -67,6 +66,7 @@
 		FCE56D062995141D00D9A4BD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE56D052995141D00D9A4BD /* Logger.swift */; };
 		FCE56D092995158D00D9A4BD /* ShortcutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE56D082995158D00D9A4BD /* ShortcutItem.swift */; };
 		FCE56D0B299515A000D9A4BD /* ShortcutItemWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE56D0A299515A000D9A4BD /* ShortcutItemWrapper.swift */; };
+		FCE56D15299529FC00D9A4BD /* SearchComicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE56D14299529FC00D9A4BD /* SearchComicModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,7 +98,7 @@
 		FC1B7A2227FCD8DE0040F6A4 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		FC1B7A2527FCD9AE0040F6A4 /* ParentViewControllerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewControllerClass.swift; sourceTree = "<group>"; };
 		FC2CE39627FDB775006BCEE7 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		FC2CE39E27FDBF56006BCEE7 /* RealmComicModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmComicModel.swift; sourceTree = "<group>"; };
+		FC2CE39E27FDBF56006BCEE7 /* ComicRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicRealmObject.swift; sourceTree = "<group>"; };
 		FC2CE3A027FDCF6E006BCEE7 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		FC2CE3B027FDE091006BCEE7 /* StarShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarShape.swift; sourceTree = "<group>"; };
 		FC2CE3B327FDE0CF006BCEE7 /* ComicDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicDetail.swift; sourceTree = "<group>"; };
@@ -126,7 +126,6 @@
 		FC2CE41C27FE4616006BCEE7 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		FC2CE41F27FE4CB5006BCEE7 /* RealmHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelperTests.swift; sourceTree = "<group>"; };
 		FC37897E27FCE7D900481C43 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
-		FC37898327FCEF5000481C43 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		FCB30FD527FEEC6600FC7C27 /* RealmHelperMockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelperMockTests.swift; sourceTree = "<group>"; };
 		FCE4F3E627FCA854003CEFBC /* Comics Shortcut Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Comics Shortcut Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE4F3E927FCA854003CEFBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +149,7 @@
 		FCE56D052995141D00D9A4BD /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FCE56D082995158D00D9A4BD /* ShortcutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItem.swift; sourceTree = "<group>"; };
 		FCE56D0A299515A000D9A4BD /* ShortcutItemWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItemWrapper.swift; sourceTree = "<group>"; };
+		FCE56D14299529FC00D9A4BD /* SearchComicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchComicModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +230,7 @@
 		FC2CE39D27FDBF49006BCEE7 /* RealmModels */ = {
 			isa = PBXGroup;
 			children = (
-				FC2CE39E27FDBF56006BCEE7 /* RealmComicModel.swift */,
+				FC2CE39E27FDBF56006BCEE7 /* ComicRealmObject.swift */,
 			);
 			path = RealmModels;
 			sourceTree = "<group>";
@@ -273,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				FCE4F42127FCA95C003CEFBC /* ComicModel.swift */,
+				FCE56D14299529FC00D9A4BD /* SearchComicModel.swift */,
 			);
 			path = AppModels;
 			sourceTree = "<group>";
@@ -397,14 +398,6 @@
 			path = DatabaseTests;
 			sourceTree = "<group>";
 		};
-		FC37898227FCEF4600481C43 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				FC37898327FCEF5000481C43 /* PersistenceController.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		FCE4F3DD27FCA854003CEFBC = {
 			isa = PBXGroup;
 			children = (
@@ -466,7 +459,6 @@
 				FC2CE41627FE4299006BCEE7 /* Language */,
 				FC2CE3EE27FE2C01006BCEE7 /* Log */,
 				FC2CE3EB27FE2B84006BCEE7 /* Helpers */,
-				FC37898227FCEF4600481C43 /* CoreData */,
 				FC1B7A1D27FCD6D80040F6A4 /* CustomViews */,
 				FCE4F43427FCA99D003CEFBC /* Viper Structure */,
 				FCE4F41C27FCA92E003CEFBC /* Extensions */,
@@ -816,11 +808,12 @@
 				FC1B7A1827FCCC4A0040F6A4 /* ComicDetailRouter.swift in Sources */,
 				FC2CE41D27FE4616006BCEE7 /* AppStrings.swift in Sources */,
 				FC2CE3E227FE23C2006BCEE7 /* ComicCardViewModel.swift in Sources */,
+				FCE56D15299529FC00D9A4BD /* SearchComicModel.swift in Sources */,
 				FCE4F3EC27FCA854003CEFBC /* SceneDelegate.swift in Sources */,
 				FC2CE41A27FE43C5006BCEE7 /* StringExtensions.swift in Sources */,
 				FCE56D0B299515A000D9A4BD /* ShortcutItemWrapper.swift in Sources */,
 				FCE4F44F27FCC9FF003CEFBC /* ComicDetailBuilder.swift in Sources */,
-				FC2CE39F27FDBF56006BCEE7 /* RealmComicModel.swift in Sources */,
+				FC2CE39F27FDBF56006BCEE7 /* ComicRealmObject.swift in Sources */,
 				FCE4F43327FCA979003CEFBC /* PublisherExtensions.swift in Sources */,
 				FC1B7A1627FCCC190040F6A4 /* ComicDetailInteractor.swift in Sources */,
 				FC1B7A2127FCD73F0040F6A4 /* ImageScrollView.swift in Sources */,
@@ -830,7 +823,6 @@
 				FC1B7A1C27FCCD870040F6A4 /* ComicDetailViewModel.swift in Sources */,
 				FC2CE41827FE42A3006BCEE7 /* Language.swift in Sources */,
 				FCE4F44D27FCC9F4003CEFBC /* ComicDetailEnviroment.swift in Sources */,
-				FC37898427FCEF5000481C43 /* PersistenceController.swift in Sources */,
 				FC2CE3B227FDE092006BCEE7 /* StarShape.swift in Sources */,
 				FCE4F43627FCA99D003CEFBC /* Interfaces.swift in Sources */,
 				FC2CE3F027FE2C0A006BCEE7 /* Log.swift in Sources */,

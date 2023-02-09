@@ -8,12 +8,15 @@
 import SwiftUI
 import Foundation
 
-struct Star: Shape {
+struct StarShape: Shape {
     let corners: Int
     let smoothness: CGFloat
     
     func path(in rect: CGRect) -> Path {
-        guard corners >= 2 else { return Path() }
+        guard corners >= 2 else {
+            return Path()
+        }
+        
         let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
         var currentAngle = -CGFloat.pi / 2
         let angleAdjustment = .pi * 2 / CGFloat(corners * 2)

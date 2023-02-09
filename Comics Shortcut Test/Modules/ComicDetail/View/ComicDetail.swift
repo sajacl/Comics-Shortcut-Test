@@ -22,7 +22,7 @@ struct ComicDetail: ViewInterface, View {
         GeometryReader { geometry in
             VStack(alignment: .leading){
                 ZStack {
-                KFImage(viewModel.comic.imageURL())
+                    KFImage(try! viewModel.comic.createImageURL())
                     .resizable()
                     .scaledToFill()
                     .frame(width: geometry.size.width, height: 300)
@@ -34,7 +34,10 @@ struct ComicDetail: ViewInterface, View {
                             Spacer()
                             
                             NavigationLink {
-                                FullImageComicViewControllerWrapper(imageURL: viewModel.comic.imageURL(), comicName: viewModel.comic.title)
+                                FullImageComicViewControllerWrapper(
+                                    name: viewModel.comic.title,
+                                    pair: .url(try! viewModel.comic.createImageURL())
+                                )
                             } label: {
                                 Image(systemName: "magnifyingglass")
                                   .resizable()
@@ -79,7 +82,7 @@ struct ComicDetail: ViewInterface, View {
                     .frame(width: 35, height: 35)
                     .foregroundColor(.red)
                     
-                    Star(corners: 5, smoothness: 0.45)
+                    StarShape(corners: 5, smoothness: 0.45)
                         .fill(viewModel.favoritedColor)
                         .frame(width: 35, height: 35)
                         .background(Color.clear)
@@ -97,7 +100,7 @@ struct ComicDetail: ViewInterface, View {
         ScrollView {
             VStack {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(viewModel.comic.getComicDateString())
+                    Text(viewModel.comic.stringDate)
                         .font(.avenirNextRegular(size: 12))
                         .foregroundColor(.gray)
                     

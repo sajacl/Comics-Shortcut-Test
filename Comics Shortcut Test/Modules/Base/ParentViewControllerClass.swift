@@ -16,7 +16,7 @@ class ParentViewControllerClass: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
+    override final func viewDidLoad() {
         super.viewDidLoad()
         
         configViewController()

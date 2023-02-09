@@ -7,22 +7,8 @@
 
 import Foundation
 
-// MARK: - Searching Comics, Need A Representation Custom Model
-// MARK: - Model For Searching Comics
-
+/// Decodable representation of searched `Comic`.
 struct SearchedComicsDecodableModel: Decodable {
     let num: Int?
     let path: String?
-}
-
-struct SearchComicModel: Identifiable {
-    let id: Int
-    let path: String
-}
-
-extension SearchComicModel {
-    init(decodableModel: SearchedComicsDecodableModel) {
-        self.id = decodableModel.num ?? -1
-        self.path = decodableModel.path ?? ""
-    }
 }

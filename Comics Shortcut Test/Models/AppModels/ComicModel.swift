@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ComicModel: BaseEntityInterface, Codable, Identifiable {
+struct ComicModel: Identifiable {
     let id: Int
     let month: String
     let num: Int
@@ -18,20 +18,24 @@ struct ComicModel: BaseEntityInterface, Codable, Identifiable {
     let title, day: String
     var isFavorite: Bool
     
-    func imageURL() -> URL {
+    /// Creating `Image-URL` from string url.
+    /// - Warning: Can throw bad url error.
+    func createImageURL() throws -> URL {
         guard let url = URL(string: img) else {
-            preconditionFailure()
+            throw URLError(.badURL)
         }
         
         return url
     }
     
-    func getComicDateString() -> String {
-        "\(year)/\(month)/\(day)"
+    /// Constructing string from comics `Year`, `Month`, `Day` representing date.
+    var stringDate: String {
+        return "\(year)/\(month)/\(day)"
     }
 }
 
 extension ComicModel {
+    /// Only used for previews.
     init() {
         self.id = -1
         self.month = ""
@@ -48,7 +52,8 @@ extension ComicModel {
         self.isFavorite = false
     }
     
-    init(decodableModel: ComicDecodableModel) {
+    /// Used for constructing comic model from api side model.
+    init(from decodableModel: ComicDecodableModel) {
         self.id = decodableModel.num ?? -1
         self.month = decodableModel.month ?? ""
         self.num = decodableModel.num ?? -1
@@ -64,6 +69,7 @@ extension ComicModel {
         self.isFavorite = false
     }
     
+    /// Used for re-constructing comic model with toggle-able favorite.
     init(model: ComicModel, isFavorite: Bool) {
         self.id = model.num
         self.month = model.month
@@ -80,7 +86,8 @@ extension ComicModel {
         self.isFavorite = isFavorite
     }
     
-    init(from realmObject: RealmComicModel) {
+    /// Used for constructing comic model from realm object.
+    init(from realmObject: ComicRealmObject) {
         self.id = realmObject.num
         self.month = realmObject.month
         self.num = realmObject.num
