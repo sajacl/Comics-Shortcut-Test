@@ -293,24 +293,24 @@
 			path = Log;
 			sourceTree = "<group>";
 		};
-		FC2CE3F127FE2D2C006BCEE7 /* AppDelegateCompsotie */ = {
+		FC2CE3F127FE2D2C006BCEE7 /* Bootstrap */ = {
 			isa = PBXGroup;
 			children = (
 				FC2CE3F227FE2D2C006BCEE7 /* AppDelegateFactory.swift */,
 				FC2CE3F927FE2D2C006BCEE7 /* AppDelegateComposite.swift */,
-				FC2CE3F327FE2D2C006BCEE7 /* SubComposites */,
+				FC2CE3F327FE2D2C006BCEE7 /* Composites */,
 			);
-			path = AppDelegateCompsotie;
+			path = Bootstrap;
 			sourceTree = "<group>";
 		};
-		FC2CE3F327FE2D2C006BCEE7 /* SubComposites */ = {
+		FC2CE3F327FE2D2C006BCEE7 /* Composites */ = {
 			isa = PBXGroup;
 			children = (
 				FC2CE3F427FE2D2C006BCEE7 /* PushNotificationsAppDelegate.swift */,
 				FC2CE3F527FE2D2C006BCEE7 /* ShortcutHandlerAppDelegate.swift */,
 				FC2CE3F827FE2D2C006BCEE7 /* ThirdPartiesConfiguratorAppDelegate.swift */,
 			);
-			path = SubComposites;
+			path = Composites;
 			sourceTree = "<group>";
 		};
 		FC2CE40327FE31F7006BCEE7 /* Favorites */ = {
@@ -428,7 +428,7 @@
 		FCE4F3E827FCA854003CEFBC /* Comics Shortcut Test */ = {
 			isa = PBXGroup;
 			children = (
-				FCE4F44A27FCC87D003CEFBC /* Bootstrap */,
+				FCE4F44A27FCC87D003CEFBC /* AppDelegate */,
 				FCE4F43727FCA9EC003CEFBC /* Models */,
 				FCE4F41E27FCA943003CEFBC /* Modules */,
 				FCE4F41D27FCA93B003CEFBC /* Utils */,
@@ -556,14 +556,14 @@
 			path = SupportedFiles;
 			sourceTree = "<group>";
 		};
-		FCE4F44A27FCC87D003CEFBC /* Bootstrap */ = {
+		FCE4F44A27FCC87D003CEFBC /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
 				FCE4F3E927FCA854003CEFBC /* AppDelegate.swift */,
 				FCE4F3EB27FCA854003CEFBC /* SceneDelegate.swift */,
-				FC2CE3F127FE2D2C006BCEE7 /* AppDelegateCompsotie */,
+				FC2CE3F127FE2D2C006BCEE7 /* Bootstrap */,
 			);
-			path = Bootstrap;
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		FCE4F44B27FCC9D9003CEFBC /* Base */ = {
