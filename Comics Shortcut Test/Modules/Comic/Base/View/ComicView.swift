@@ -9,7 +9,7 @@ import SwiftUI
 import CardStack
 
 struct ComicView: View {
-    @EnvironmentObject var environment: ComicEnvironment
+    private let viewTitle = String(.appTitle)
     
     @StateObject private var viewModel = ViewModel()
     
@@ -28,18 +28,29 @@ struct ComicView: View {
                         .cornerRadius(8)
                         .overlay(
                             HStack {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.gray)
-                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, 16)
+                                searchIcon
                             })
                 }
                 .foregroundColor(.gray)
                 
                 CardStackView<ComicCardView, ComicIdHolderModel>(configuration: configuration, items: viewModel.items)
             }
-            .navigationBarTitle(environment.title)
+            .navigationBarTitle(viewTitle)
         }
+    }
+    
+    private var searchIcon: some View {
+        Image(systemName: "magnifyingglass")
+            .foregroundColor(.gray)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 16)
+    }
+    
+    private var cardStackView: some View {
+        CardStackView<ComicCardView, ComicIdHolderModel>(
+            configuration: configuration,
+            items: viewModel.items
+        )
     }
 }
 
@@ -47,7 +58,6 @@ struct ComicView: View {
 struct ComicView_Previews: PreviewProvider {
     static var previews: some View {
         return ComicView()
-        .environmentObject(ComicEnvironment())
     }
 }
 #endif

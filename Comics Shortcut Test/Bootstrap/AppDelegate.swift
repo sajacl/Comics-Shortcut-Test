@@ -9,8 +9,10 @@ import UIKit
 import CoreData
 import RealmSwift
 
+typealias AppDelegateType = UIResponder & UIApplicationDelegate
+
 @main
-final class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: AppDelegateType {
     /// Default app delegates/configurations factory.
     private let appDelegate = AppDelegateFactory.default()
 
@@ -38,4 +40,3 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         )
     }
 }
-

@@ -64,6 +64,9 @@
 		FCE4F43E27FCBCFA003CEFBC /* SearchedComicsDecodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F43D27FCBCFA003CEFBC /* SearchedComicsDecodableModel.swift */; };
 		FCE4F44D27FCC9F4003CEFBC /* ComicDetailEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F44C27FCC9F4003CEFBC /* ComicDetailEnviroment.swift */; };
 		FCE4F44F27FCC9FF003CEFBC /* ComicDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F44E27FCC9FF003CEFBC /* ComicDetailBuilder.swift */; };
+		FCE56D062995141D00D9A4BD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE56D052995141D00D9A4BD /* Logger.swift */; };
+		FCE56D092995158D00D9A4BD /* ShortcutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE56D082995158D00D9A4BD /* ShortcutItem.swift */; };
+		FCE56D0B299515A000D9A4BD /* ShortcutItemWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE56D0A299515A000D9A4BD /* ShortcutItemWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +147,9 @@
 		FCE4F43D27FCBCFA003CEFBC /* SearchedComicsDecodableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedComicsDecodableModel.swift; sourceTree = "<group>"; };
 		FCE4F44C27FCC9F4003CEFBC /* ComicDetailEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailEnviroment.swift; sourceTree = "<group>"; };
 		FCE4F44E27FCC9FF003CEFBC /* ComicDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailBuilder.swift; sourceTree = "<group>"; };
+		FCE56D052995141D00D9A4BD /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		FCE56D082995158D00D9A4BD /* ShortcutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItem.swift; sourceTree = "<group>"; };
+		FCE56D0A299515A000D9A4BD /* ShortcutItemWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItemWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,7 +428,7 @@
 		FCE4F3E827FCA854003CEFBC /* Comics Shortcut Test */ = {
 			isa = PBXGroup;
 			children = (
-				FCE4F44A27FCC87D003CEFBC /* Delegates */,
+				FCE4F44A27FCC87D003CEFBC /* Bootstrap */,
 				FCE4F43727FCA9EC003CEFBC /* Models */,
 				FCE4F41E27FCA943003CEFBC /* Modules */,
 				FCE4F41D27FCA93B003CEFBC /* Utils */,
@@ -448,6 +454,7 @@
 				FC2CE3B527FDE11A006BCEE7 /* FontExtensions.swift */,
 				FC2CE40127FE31CD006BCEE7 /* UIApplicationExtensions.swift */,
 				FC2CE41927FE43C5006BCEE7 /* StringExtensions.swift */,
+				FCE56D052995141D00D9A4BD /* Logger.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -455,6 +462,7 @@
 		FCE4F41D27FCA93B003CEFBC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FCE56D072995157B00D9A4BD /* Shortcut */,
 				FC2CE41627FE4299006BCEE7 /* Language */,
 				FC2CE3EE27FE2C01006BCEE7 /* Log */,
 				FC2CE3EB27FE2B84006BCEE7 /* Helpers */,
@@ -548,14 +556,14 @@
 			path = SupportedFiles;
 			sourceTree = "<group>";
 		};
-		FCE4F44A27FCC87D003CEFBC /* Delegates */ = {
+		FCE4F44A27FCC87D003CEFBC /* Bootstrap */ = {
 			isa = PBXGroup;
 			children = (
 				FCE4F3E927FCA854003CEFBC /* AppDelegate.swift */,
 				FCE4F3EB27FCA854003CEFBC /* SceneDelegate.swift */,
 				FC2CE3F127FE2D2C006BCEE7 /* AppDelegateCompsotie */,
 			);
-			path = Delegates;
+			path = Bootstrap;
 			sourceTree = "<group>";
 		};
 		FCE4F44B27FCC9D9003CEFBC /* Base */ = {
@@ -605,6 +613,15 @@
 				FC1B7A1527FCCC190040F6A4 /* ComicDetailInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		FCE56D072995157B00D9A4BD /* Shortcut */ = {
+			isa = PBXGroup;
+			children = (
+				FCE56D082995158D00D9A4BD /* ShortcutItem.swift */,
+				FCE56D0A299515A000D9A4BD /* ShortcutItemWrapper.swift */,
+			);
+			path = Shortcut;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -790,6 +807,7 @@
 				FCE4F42C27FCA95C003CEFBC /* ComicViewModel.swift in Sources */,
 				FCE4F42A27FCA95C003CEFBC /* ComicModel.swift in Sources */,
 				FC2CE40727FE3DBF006BCEE7 /* FavoritesViewModel.swift in Sources */,
+				FCE56D062995141D00D9A4BD /* Logger.swift in Sources */,
 				FC2CE3B627FDE11A006BCEE7 /* FontExtensions.swift in Sources */,
 				FCE4F43927FCA9FB003CEFBC /* APIResult.swift in Sources */,
 				FCE4F42B27FCA95C003CEFBC /* ComicView.swift in Sources */,
@@ -800,6 +818,7 @@
 				FC2CE3E227FE23C2006BCEE7 /* ComicCardViewModel.swift in Sources */,
 				FCE4F3EC27FCA854003CEFBC /* SceneDelegate.swift in Sources */,
 				FC2CE41A27FE43C5006BCEE7 /* StringExtensions.swift in Sources */,
+				FCE56D0B299515A000D9A4BD /* ShortcutItemWrapper.swift in Sources */,
 				FCE4F44F27FCC9FF003CEFBC /* ComicDetailBuilder.swift in Sources */,
 				FC2CE39F27FDBF56006BCEE7 /* RealmComicModel.swift in Sources */,
 				FCE4F43327FCA979003CEFBC /* PublisherExtensions.swift in Sources */,
@@ -825,6 +844,7 @@
 				FC2CE40527FE320B006BCEE7 /* FavoritesView.swift in Sources */,
 				FC37897F27FCE7D900481C43 /* ShareSheet.swift in Sources */,
 				FC2CE3DE27FE15B4006BCEE7 /* SearchViewModel.swift in Sources */,
+				FCE56D092995158D00D9A4BD /* ShortcutItem.swift in Sources */,
 				FC2CE39727FDB775006BCEE7 /* SearchView.swift in Sources */,
 				FC2CE3FF27FE2D2C006BCEE7 /* ThirdPartiesConfiguratorAppDelegate.swift in Sources */,
 				FCE4F43C27FCACFC003CEFBC /* ComicDecodableModel.swift in Sources */,
@@ -1151,7 +1171,7 @@
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 10.35.0;
 			};
 		};
 		FC2CE3E427FE24DB006BCEE7 /* XCRemoteSwiftPackageReference "CardStack" */ = {

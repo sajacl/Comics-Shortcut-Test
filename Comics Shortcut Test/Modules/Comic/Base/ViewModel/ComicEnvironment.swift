@@ -8,12 +8,12 @@
 import Foundation
 import Combine
 
-final class ComicEnvironment: ObservableObject {
-    let objectWillChange = ObservableObjectPublisher()
-
-    @Published var title: String = String(.appTitle) {
-       willSet {
-            self.objectWillChange.send()
-        }
-    }
-}
+//final class ComicEnvironment: ObservableObject {
+//    let objectWillChange = ObservableObjectPublisher()
+//
+//    @Published var title: String = String(.appTitle) {
+//       willSet {
+//            self.objectWillChange.send()
+//        }
+//    }
+//}

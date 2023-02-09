@@ -10,9 +10,18 @@
       }
     },
     {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "2db469112fbcfd83ff0a96c4546772d283f317f5"
+      }
+    },
+    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core.git",
+      "location" : "https://github.com/realm/realm-core",
       "state" : {
         "revision" : "b9467f3ecfead791cc87ab70b4f1c3c290be6ffd",
         "version" : "13.4.0"

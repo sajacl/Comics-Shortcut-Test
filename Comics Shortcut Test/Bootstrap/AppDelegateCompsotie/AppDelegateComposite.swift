@@ -7,8 +7,6 @@
 
 import UIKit
 
-typealias AppDelegateType = UIResponder & UIApplicationDelegate
-
 final class CompositeAppDelegate: AppDelegateType {
     private let appDelegates: [AppDelegateType]
 

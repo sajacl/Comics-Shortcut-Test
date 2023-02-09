@@ -8,12 +8,15 @@
 import UIKit
 
 final class ShortcutHandlerAppDelegate: AppDelegateType {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         
-        let favoriteShortcut = ShortcutItemWrapper(item: .favorite)
+        let favoriteShortcut = ShortcutItemWrapper.favoriteShortcut
 
         UIApplication.shared.shortcutItems = [
-            favoriteShortcut.build()
+            favoriteShortcut
         ]
         
         return true

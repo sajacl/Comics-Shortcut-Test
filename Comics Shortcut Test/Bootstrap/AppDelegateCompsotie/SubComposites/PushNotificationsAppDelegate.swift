@@ -125,7 +125,10 @@ final class NotificationQueue {
 }
 
 final class PushNotificationsAppDelegate: AppDelegateType {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         
         requestPushNotificationsAuthorization()
 
@@ -139,7 +142,12 @@ final class PushNotificationsAppDelegate: AppDelegateType {
         return true
     }
     
-    public static func sendLocalPushNotification(title: String, subtitle: String, object: Any? = nil, afterInterval: TimeInterval = 3) {
+    public static func sendLocalPushNotification(
+        title: String,
+        subtitle: String,
+        object: Any? = nil,
+        afterInterval: TimeInterval = 3
+    ) {
         let content = UNMutableNotificationContent()
         content.title = title
         content.subtitle = subtitle
@@ -154,16 +162,6 @@ final class PushNotificationsAppDelegate: AppDelegateType {
         UNUserNotificationCenter.current().add(request)
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        LInfo("APNs token retrieved: \(deviceToken)")
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {}
-
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        LInfo("Unable to register for remote notifications: \(error.localizedDescription)")
-    }
-    
     func requestPushNotificationsAuthorization() {
         UNUserNotificationCenter.current().delegate = self
         
@@ -174,22 +172,24 @@ final class PushNotificationsAppDelegate: AppDelegateType {
         
         UIApplication.shared.registerForRemoteNotifications()
     }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {}
 }
 
 // MARK: UNUserNotificationCenterDelegate
 
 extension PushNotificationsAppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
         completionHandler([.sound])
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
         completionHandler()
     }
 }
