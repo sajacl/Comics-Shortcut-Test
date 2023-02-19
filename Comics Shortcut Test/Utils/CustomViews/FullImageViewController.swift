@@ -41,7 +41,7 @@ struct FullImageComicViewControllerWrapper: UIViewControllerRepresentable {
     }
 }
 
-private final class FullImageComicViewController: ParentViewControllerClass {
+private final class FullImageComicViewController: UIViewController {
     private lazy var imageScrollView: ImageScrollView = {
         let parent = ImageScrollView()
         parent.setup()
@@ -62,6 +62,10 @@ private final class FullImageComicViewController: ParentViewControllerClass {
         return parent
     }()
     
+    private static let placeHolderImage = UIImage(named: "shortcut-icon")
+    
+    private lazy var imageDownloadTask: DownloadTask? = nil
+    
     private let pair: ImageOrURL
     
     // MARK: - LifeCycles
@@ -77,6 +81,14 @@ private final class FullImageComicViewController: ParentViewControllerClass {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override final func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configViewController()
+        addViews()
+        constraintViews()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -85,39 +97,21 @@ private final class FullImageComicViewController: ParentViewControllerClass {
             imageScrollView.display(image: image)
             
         case let .url(url):
-            let token = KF.url(url, cacheKey: "\(url.absoluteString)")
+            imageDownloadTask =
+            KF.url(url, cacheKey: "\(url.absoluteString)")
                 .placeholder(Self.placeHolderImage)
                 .loadDiskFileSynchronously()
                 .cacheOriginalImage()
                 .fade(duration: 0.1)
-
                 .onSuccess { [weak self] result in
                     self?.displayImage(result.image)
-                }
+                }.set(to: comicImageView)
         }
     }
     
     deinit {
-        print("HI")
+        imageDownloadTask?.cancel()
     }
-    
-    private static let placeHolderImage = UIImage(named: "shortcut-icon")
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        if self.imageScrollView.zoomView == nil,
-//           let image = comicImageView.image {
-//            UIView.transition(
-//                with: imageScrollView,
-//                duration: 0.4,
-//                options: .transitionCrossDissolve,
-//                animations: {
-//                    self.imageScrollView.display(image: image)
-//                }
-//            )
-//        }
-//    }
     
     private func displayImage(_ image: UIImage) {
         UIView.transition(
@@ -130,18 +124,18 @@ private final class FullImageComicViewController: ParentViewControllerClass {
         )
     }
     
-    override func configViewController() {
+    func configViewController() {
         addLightBlurEffect()
     }
     
-    override func addViews() {
+    func addViews() {
         self.view.addSubviews(
             titleLabel,
             imageScrollView
         )
     }
     
-    override func constraintViews() {
+    func constraintViews() {
         titleLabel
             .topAnchor(equalTo: view.topAnchor, constant: 10)
             .leadingAnchor(equalTo: view.leadingAnchor, constant: 10)
